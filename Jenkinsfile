@@ -26,6 +26,8 @@ node {
     {
         echo "Performing HA Testing"
         sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number )
+        echo "Sandbox started"
+
         withEnv(['SANDBOX_ID='+sandboxId]) 
         {
             sh "python ./jenkins/jenkins_test.py"
