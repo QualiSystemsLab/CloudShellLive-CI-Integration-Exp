@@ -5,7 +5,7 @@ node {
     stage ("Build")
     {
         echo "Pulling Changed files from GitHub"
-        git credentialsId: '71edbaeb-4ec1-430a-aa14-ead37881efb1', url: 'https://github.com/QualiSystemsLab/CloudShellLive-CI-Integration-Adv'
+        git credentialsId: '71edbaeb-4ec1-430a-aa14-ead37881efb1', url: 'https://github.com/QualiSystemsLab/CloudShellLive-CI-Integration-Exp'
         
         def server = Artifactory.server('Artifactory')
         def uploadSpec = """
@@ -25,7 +25,7 @@ node {
     stage ("Test - HA")
     {
         echo "Performing HA Testing"
-        sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_name + "-" + build_number )
+        sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number )
         withEnv(['SANDBOX_ID='+sandboxId]) 
         {
             sh "python ./jenkins/jenkins_test.py"
@@ -36,7 +36,7 @@ node {
     stage ("Test - Performance")
     {
         echo "Performing Performance Testing"
-        sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_name + "-" + build_number) 
+        sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_number) 
         withEnv(['SANDBOX_ID='+sandboxId]) 
         {
             sh "python ./jenkins/jenkins_test.py"
