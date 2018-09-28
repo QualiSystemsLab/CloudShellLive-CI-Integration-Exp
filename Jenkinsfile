@@ -25,8 +25,15 @@ node {
     stage ("Test - HA")
     {
         echo "Performing HA Testing"
-        sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number )
-        echo "Sandbox started"
+        try {
+        // do something that fails
+            sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 10 )
+            echo "Sandbox started"
+        } catch (Exception err) {
+
+            currentBuild.result = 'FAILURE'
+        }
+
 
         withEnv(['SANDBOX_ID='+sandboxId]) 
         {
