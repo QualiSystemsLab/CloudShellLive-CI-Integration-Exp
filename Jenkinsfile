@@ -13,7 +13,7 @@ node {
         "files":[
                     {
                       "pattern": "index.html",
-                      "target": "CloudShell-Live-CI/""" + build_name + "-" + build_number + """/",
+                      "target": "CloudShell-Live-CI/""" + build_number + """/",
                       "recursive": "true",
                       "flat": "false"
                     }
