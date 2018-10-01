@@ -27,10 +27,11 @@ node {
         echo "Performing HA Testing"
         try {
         // do something that fails
-            sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 10 )
+            sandboxId = startSandbox(maxDuration: 30, name: 'test conflict', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 1 )
             echo "Sandbox started"
         } catch (Exception err) {
 
+            echo "Conflict found... could not start sandbox"
             currentBuild.result = 'NOT_BUILT'
             throw err
         }
