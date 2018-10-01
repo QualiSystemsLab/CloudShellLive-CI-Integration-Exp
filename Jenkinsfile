@@ -32,20 +32,20 @@ node {
         // do something that fails
             sandboxId = startSandbox(maxDuration: 30, name: 'test conflict', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 1 )
             echo "Sandbox started"
+            withEnv(['SANDBOX_ID='+sandboxId]) 
+            {
+                sh "python ./jenkins/jenkins_test.py"
+            }
+            sleep(10)
+            stopSandbox(sandboxId)
         } catch (Exception err) {
 
             echo "Conflict found... could not start sandbox"
             currentBuild.result = 'NOT_BUILT'
-            throw err
         }
 
 
-        withEnv(['SANDBOX_ID='+sandboxId]) 
-        {
-            sh "python ./jenkins/jenkins_test.py"
-        }
-        sleep(10)
-        stopSandbox(sandboxId)
+
     }
     stage ("Test - Performance")
     {
@@ -66,7 +66,6 @@ node {
 
                 echo "Conflict found... could not start sandbox"
                 currentBuild.result = 'NOT_BUILT'
-                throw err
             }
         }
 
