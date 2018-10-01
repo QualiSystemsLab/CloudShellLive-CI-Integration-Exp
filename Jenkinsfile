@@ -1,5 +1,3 @@
-import com.quali.cloudshell.qsExceptions.ReserveBluePrintConflictException;
-
 node {
     def build_name = "${env.JOB_NAME}"
     def build_number = "${env.BUILD_NUMBER}"
@@ -31,7 +29,7 @@ node {
         // do something that fails
             sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 10 )
             echo "Sandbox started"
-        } catch (ReserveBluePrintConflictException err) {
+        } catch (Exception err) {
 
             currentBuild.result = 'NOT_BUILT'
             throw err
