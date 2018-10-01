@@ -49,6 +49,7 @@ node {
     }
     stage ("Test - Performance")
     {
+        echo 'banch name is: ' + branch_name
         if (branch_name == 'master'){
             echo "Performing Performance Testing"
             sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_number) 
