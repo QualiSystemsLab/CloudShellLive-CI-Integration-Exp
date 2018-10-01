@@ -29,9 +29,10 @@ node {
         // do something that fails
             sandboxId = startSandbox(maxDuration: 30, name: 'Flex High Availability DB Test', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 10 )
             echo "Sandbox started"
-        } catch (Exception err) {
+        } catch (ReserveBluePrintConflictException err) {
 
-            currentBuild.result = 'FAILURE'
+            currentBuild.result = 'NOT_BUILT'
+            throw err
         }
 
 
