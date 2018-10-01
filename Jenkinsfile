@@ -46,6 +46,9 @@ node {
     }
     stage ("Test - Performance")
     {
+        when {
+            branch 'master' 
+        }
         echo "Performing Performance Testing"
         sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_number) 
         withEnv(['SANDBOX_ID='+sandboxId]) 
