@@ -42,6 +42,7 @@ node {
 
             echo "Conflict found... could not start sandbox"
             currentBuild.result = 'NOT_BUILT'
+            throw err
         }
 
 
