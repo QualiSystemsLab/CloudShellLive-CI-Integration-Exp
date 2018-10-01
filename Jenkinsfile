@@ -44,21 +44,30 @@ node {
         {
             sh "python ./jenkins/jenkins_test.py"
         }
-        sleep(180)
+        sleep(10)
         stopSandbox(sandboxId)
     }
     stage ("Test - Performance")
     {
         echo 'banch name is: ' + branch_name
         if (branch_name == 'master'){
-            echo "Performing Performance Testing"
-            sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_number) 
-            withEnv(['SANDBOX_ID='+sandboxId]) 
-            {
-                sh "python ./jenkins/jenkins_test.py"
+            try {
+
+                echo "Performing Performance Testing"
+                sandboxId = startSandbox(maxDuration: 30, name: 'Flex Performance', sandboxName: 'Flex - Test Performance_' + build_number) 
+                withEnv(['SANDBOX_ID='+sandboxId]) 
+                {
+                    sh "python ./jenkins/jenkins_test.py"
+                }
+                sleep(10)
+                stopSandbox(sandboxId)
             }
-            sleep(180)
-            stopSandbox(sandboxId)
+            catch (Exception err) {
+
+                echo "Conflict found... could not start sandbox"
+                currentBuild.result = 'NOT_BUILT'
+                throw err
+            }
         }
 
     }
