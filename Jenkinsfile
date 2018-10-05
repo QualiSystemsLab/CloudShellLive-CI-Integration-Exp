@@ -38,7 +38,7 @@ node {
             }
             sleep(10)
             stopSandbox(sandboxId)
-        } catch (ReserveBluePrintConflictException err) {
+        } catch (com.quali.cloudshell.qsExceptions.ReserveBluePrintConflictException err) {
 
             echo "Conflict found... could not start sandbox"
             currentBuild.result = 'NOT_BUILT'
