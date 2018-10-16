@@ -39,7 +39,7 @@ node {
             sleep(10)
             stopSandbox(sandboxId)
         } catch (Exception err) {
-            echo err.getClass()
+            echo err.class.simpleName()
 
             echo "Conflict found... could not start sandbox"
             currentBuild.result = 'NOT_BUILT'
