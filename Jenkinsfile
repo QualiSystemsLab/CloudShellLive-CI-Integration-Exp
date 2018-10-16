@@ -4,6 +4,7 @@ node {
     def build_number = "${env.BUILD_NUMBER}"
     def branch_name = "${env.BRANCH_NAME}"
 
+    mytools = load 'Tools.groovy'
 
     stage ("Build")
     {
