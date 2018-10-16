@@ -1,10 +1,10 @@
 
+@Grab('com.quali.cloudshell:sandbox-api:1.1.0.13')
 node {
     def build_name = "${env.JOB_NAME}"
     def build_number = "${env.BUILD_NUMBER}"
     def branch_name = "${env.BRANCH_NAME}"
 
-    mytools = load 'Tools.groovy'
 
     stage ("Build")
     {
