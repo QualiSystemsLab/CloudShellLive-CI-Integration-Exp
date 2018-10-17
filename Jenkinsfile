@@ -3,8 +3,6 @@ node {
     def build_name = "${env.JOB_NAME}"
     def build_number = "${env.BUILD_NUMBER}"
     def branch_name = "${env.BRANCH_NAME}"
-    @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
-    import com.quali.cloudshell.qsExceptions.SandboxApiException 
 
     stage ("Build")
     {
