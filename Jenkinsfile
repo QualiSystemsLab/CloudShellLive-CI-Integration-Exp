@@ -10,7 +10,7 @@ node {
         echo "Pulling Changed files from GitHub"
         git credentialsId: '71edbaeb-4ec1-430a-aa14-ead37881efb1', url: 'https://github.com/QualiSystemsLab/CloudShellLive-CI-Integration-Exp'
         def server = Artifactory.server('Artifactory')
-        load "Example.Groovy"
+        load 'Test.Groovy'
         def uploadSpec = """
         {
         "files":[
