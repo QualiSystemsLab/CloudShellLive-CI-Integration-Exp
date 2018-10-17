@@ -1,3 +1,4 @@
+@GrabConfig(systemClassLoader=true)
 @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
 import com.quali.cloudshell.qsExceptions.SandboxApiException 
 def exampleMethod() {
