@@ -10,6 +10,7 @@ node {
         echo "Pulling Changed files from GitHub"
         git credentialsId: '71edbaeb-4ec1-430a-aa14-ead37881efb1', url: 'https://github.com/QualiSystemsLab/CloudShellLive-CI-Integration-Exp'
         def server = Artifactory.server('Artifactory')
+        load "Example.Groovy"
         def uploadSpec = """
         {
         "files":[
@@ -29,8 +30,6 @@ node {
         echo "Performing HA Testing"
         try {
         // do something that fails
-            @GrabConfig(systemClassLoader=true)
-            @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
             sandboxId = startSandbox(maxDuration: 30, name: 'test conflict', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 1 )
             echo "Sandbox started"
             withEnv(['SANDBOX_ID='+sandboxId]) 

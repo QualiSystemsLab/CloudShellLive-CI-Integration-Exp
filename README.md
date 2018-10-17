@@ -5,3 +5,6 @@ This repository is used to demonstrate how external build and testing solutions 
 Here, Jenkins will trigger automatic builds based on a commit to this GitHub repo. 
 
 The simple tests will then run against the modified code base to ensure that the code change did not break anything.
+
+            @GrabConfig(systemClassLoader=true)
+            @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
