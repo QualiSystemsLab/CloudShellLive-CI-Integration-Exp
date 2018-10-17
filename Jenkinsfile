@@ -3,7 +3,8 @@ node {
     def build_name = "${env.JOB_NAME}"
     def build_number = "${env.BUILD_NUMBER}"
     def branch_name = "${env.BRANCH_NAME}"
-
+    @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
+    import com.quali.cloudshell.qsExceptions.SandboxApiException 
 
     stage ("Build")
     {
@@ -30,8 +31,6 @@ node {
         echo "Performing HA Testing"
         try {
         // do something that fails
-            @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
-            import com.quali.cloudshell.qsExceptions.SandboxApiException 
             sandboxId = startSandbox(maxDuration: 30, name: 'test conflict', sandboxName: 'Flex - Test - HA_' + build_number, timeout: 1 )
             echo "Sandbox started"
             withEnv(['SANDBOX_ID='+sandboxId]) 
