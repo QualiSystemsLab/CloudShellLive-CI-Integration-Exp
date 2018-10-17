@@ -9,7 +9,6 @@ node {
     {
         echo "Pulling Changed files from GitHub"
         git credentialsId: '71edbaeb-4ec1-430a-aa14-ead37881efb1', url: 'https://github.com/QualiSystemsLab/CloudShellLive-CI-Integration-Exp'
-        @Grab('com.quali.cloudshell:sandbox-api')
         def server = Artifactory.server('Artifactory')
         def uploadSpec = """
         {
@@ -27,6 +26,8 @@ node {
     }
     stage ("Test - HA")
     {
+        @Grab('com.quali.cloudshell:sandbox-api:1.1.0.14')
+
         echo "Performing HA Testing"
         try {
         // do something that fails
